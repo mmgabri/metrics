@@ -8,7 +8,6 @@ import java.util.Random;
 
 @Service
 public class ExecuteService {
-
     public Mono<String> execute(long duration) {
         return Mono.just(getReturnCode())
                 .delayElement(Duration.ofMillis(duration));

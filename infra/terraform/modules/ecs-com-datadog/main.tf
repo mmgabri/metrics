@@ -32,7 +32,7 @@ resource "aws_ecs_task_definition" "service_task" {
         { name = "DD_JMXFETCH_ENABLED", value = "true" },  # Habilitar coleta de métricas JMX
         { name = "DD_JMXFETCH_STATSD_HOST", value = "localhost" },
         { name = "DD_JMXFETCH_STATSD_PORT", value = "8125" },
-        { name = "DD_API_KEY", value = var.datadog_api_key }
+        { name = "DD_API_KEY", value = var.datadog_api_key },
       ]
       logConfiguration = {
         logDriver = "awslogs"
@@ -69,7 +69,8 @@ resource "aws_ecs_task_definition" "service_task" {
         { name = "DD_DOGSTATSD_NON_LOCAL_TRAFFIC", value = "true" },
         { name = "DD_JMXFETCH_ENABLED", value = "true" },  # Habilitar coleta de métricas JMX
         { name = "DD_JMXFETCH_STATSD_HOST", value = "localhost" },
-        { name = "DD_JMXFETCH_STATSD_PORT", value = "8125" }
+        { name = "DD_JMXFETCH_STATSD_PORT", value = "8125" },
+        { name = "DD_HISTOGRAM_PERCENTILES", value = "0.99 0.95 0.90 0.50" }
       ]
       requiresCompatibilities = ["FARGATE"]
       portMappings = [
@@ -114,7 +115,7 @@ resource "aws_ecs_service" "service_task" {
   cluster         = var.ecs_cluster_name
   task_definition = aws_ecs_task_definition.service_task.arn
   launch_type     = "FARGATE"
-  desired_count   = 1
+  desired_count   = 7
 
   network_configuration {
     subnets          = var.public_subnets

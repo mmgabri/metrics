@@ -50,15 +50,15 @@ public class Controller {
             logger.info("Request processado em {} ms", duration);
 
             //Incrementa métrica via Micrometer
-            meterRegistry.counter("app_transaction5_count_micrometer", "app", "autorizador", "status", returnCode).increment();
-            DistributionSummary summary = meterRegistry.summary("app_transaction5_duration_micrometer", "app", "autorizador", "status", returnCode);
+            meterRegistry.counter("app_transaction6_count_micrometer", "app", "autorizador", "status", returnCode).increment();
+            DistributionSummary summary = meterRegistry.summary("app_transaction6_duration_micrometer", "app", "autorizador", "status", returnCode);
             summary.record(duration);
 
             //Incrementa métrica via DogStatsD
-            statsDClient.incrementCounter("app_transaction5_count", "app:autorizador", "status:" + returnCode);
-            statsDClient.recordExecutionTime("app_transaction5_duration_time", duration, "app:autorizador", "status:" + returnCode);
-            statsDClient.recordHistogramValue("app_transaction5_duration_histogram", duration, "app:autorizador", "status:" + returnCode);
-            statsDClient.recordDistributionValue("app_transaction5_duration_distribution", duration, "app:autorizador", "status:" + returnCode);
+            statsDClient.incrementCounter("app_transaction6_count", "app:autorizador", "status:" + returnCode);
+            statsDClient.recordExecutionTime("app_transaction6_duration_time", duration, "app:autorizador", "status:" + returnCode);
+            statsDClient.recordHistogramValue("app_transaction6_duration_histogram", duration, "app:autorizador", "status:" + returnCode);
+            statsDClient.recordDistributionValue("app_transaction6_duration_distribution", duration, "app:autorizador", "status:" + returnCode);
         } catch (Exception e) {
             logger.error("Error ao enviar métrica", e);
             throw new RuntimeException(e);
