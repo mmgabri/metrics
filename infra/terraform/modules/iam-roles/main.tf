@@ -2,7 +2,7 @@ data "aws_caller_identity" "current" {}
 
 # Role de Execução (Execution Role)
 resource "aws_iam_role" "ecs_execution_role" {
-  name = "ecs-autorizador-debito-role"
+  name = "ecs-poc-metrics-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"

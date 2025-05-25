@@ -5,5 +5,5 @@ output "nlb_arn" {
 
 output "target_group_arn" {
   description = "ARN do Target Group"
-  value       = aws_lb_target_group.router.arn
+  value       = aws_lb_target_group.poc_metric.arn
 }

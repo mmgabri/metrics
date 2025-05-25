@@ -58,19 +58,19 @@ module "cluster_ecs" {
 # Cria Service / Task / Scaling - Autorizador
 #------------------------------------------------------------------------------
 module "ecs_autorizador" {
-  source                    = "./modules/ecs-com-datadog"
-  micro_service_name        = "poc-metrics"
-  public_subnets            = var.public_subnets
-  ecr_repository            = var.poc_metrics_ecr_repository
-  execution_role_arn        = module.iam_roles.ecs_execution_role_arn
-  task_role_arn             = module.iam_roles.ecs_task_role_arn
-  ecs_cluster_name          = module.cluster_ecs.ecs_cluster_poc_metrics
+  source             = "./modules/ecs-com-datadog"
+  micro_service_name = "poc-metrics"
+  public_subnets     = var.public_subnets
+  ecr_repository     = var.poc_metrics_ecr_repository
+  execution_role_arn = module.iam_roles.ecs_execution_role_arn
+  task_role_arn      = module.iam_roles.ecs_task_role_arn
+  ecs_cluster_name   = module.cluster_ecs.ecs_cluster_poc_metrics
   security_groups = [module.security_group.ecs_sg_id]
-  target_group_arn = []
-  datadog_api_key           = var.datadog_api_key
-  cpu                       = 2048
-  memory                    = 4096
-  region                    = var.region
-  container_port            = 8080
-  host_port                 = 8080
+  target_group_arn = [module.nlb.target_group_arn]
+  datadog_api_key    = var.datadog_api_key
+  cpu                = 2048
+  memory             = 4096
+  region             = var.region
+  container_port     = 8080
+  host_port          = 8080
 }

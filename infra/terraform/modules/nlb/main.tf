@@ -8,8 +8,8 @@ resource "aws_lb" "nlb" {
 }
 
 # Criação do Target Group para ECS
-resource "aws_lb_target_group" "router" {
-  name        = "router-tg"  # Nome do Target Group
+resource "aws_lb_target_group" "poc_metric" {
+  name        = "poc-metrics-tg"  # Nome do Target Group
   port        = 8080         # Porta na qual o serviço vai responder
   protocol    = "TCP"        # Protocolo usado (TCP para NLB)
   vpc_id      = var.vpc_id   # ID da VPC onde o Target Group será criado
@@ -28,13 +28,13 @@ resource "aws_lb_target_group" "router" {
 }
 
 # Criação do Listener do Load Balancer
-resource "aws_lb_listener" "nlb_listener_router" {
+resource "aws_lb_listener" "nlb_listener_poc_metric" {
   load_balancer_arn = aws_lb.nlb.arn   # Referência ao Load Balancer criado acima
   port              = 8080             # Porta que o NLB escuta
   protocol          = "TCP"            # Protocolo do Listener (TCP para NLB)
 
   default_action {
     type             = "forward"                       # Ação padrão: encaminhar tráfego para o Target Group
-    target_group_arn = aws_lb_target_group.router.arn  # Target Group para onde o tráfego será enviado
+    target_group_arn = aws_lb_target_group.poc_metric.arn  # Target Group para onde o tráfego será enviado
   }
 }
