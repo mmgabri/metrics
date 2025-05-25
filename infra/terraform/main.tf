@@ -55,7 +55,7 @@ module "cluster_ecs" {
 }
 
 #------------------------------------------------------------------------------
-# Cria Service / Task / Scaling - Autorizador
+# Cria Service e Task 
 #------------------------------------------------------------------------------
 module "ecs_autorizador" {
   source             = "./modules/ecs-com-datadog"
