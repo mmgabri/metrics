@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+
+otel_config:
+  receiver:
+    otlp:
+      enabled: true
+      protocols:
+        grpc:
+          endpoint: 0.0.0.0:4317
+
+management:
+  otlp:
+    metrics:
+      export:
+        enabled: true
+        url: http://localhost:4317
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+      percentiles:
+        http.server.requests: 0.5,0.90,0.95,0.99
+  datadog:
+    metrics:
+      export:
+        apiKey: b194cdeecc9e1e62318497747e54eb61
+        step: 5s
+        uri: https://us5.datadoghq.com/
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus

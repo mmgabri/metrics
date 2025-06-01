@@ -123,6 +123,8 @@ resource "aws_ecs_service" "service_task" {
     assign_public_ip = true
   }
 
+
+
   dynamic "load_balancer" {
     for_each = length(var.target_group_arn) > 0 ? [var.target_group_arn[0]] : []
     content {
