@@ -3,7 +3,7 @@ import { check } from 'k6';
 
 export let options = {
     stages: [
-        { duration: '1m', target: 60 }
+        { duration: '15m', target: 100 }
         ],
     thresholds: {
         http_reqs: ['rate>=400'],

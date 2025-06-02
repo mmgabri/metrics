@@ -42,11 +42,14 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-api</artifactId>
-            <version>1.36.0</version>
-        </dependency>
+
+
+
+<!--        <dependency>-->
+<!--            <groupId>io.opentelemetry</groupId>-->
+<!--            <artifactId>opentelemetry-api</artifactId>-->
+<!--            <version>1.36.0</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>io.opentelemetry</groupId>
@@ -54,11 +57,11 @@
             <version>1.36.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-sdk-metrics</artifactId>
-            <version>1.36.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.opentelemetry</groupId>-->
+<!--            <artifactId>opentelemetry-sdk-metrics</artifactId>-->
+<!--            <version>1.36.0</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>io.opentelemetry</groupId>

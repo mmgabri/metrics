@@ -14,11 +14,6 @@ otel_config:
           endpoint: 0.0.0.0:4317
 
 management:
-  otlp:
-    metrics:
-      export:
-        enabled: true
-        url: http://localhost:4317
   metrics:
     distribution:
       percentiles-histogram:

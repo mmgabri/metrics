@@ -1,6 +1,7 @@
 package br.com.mmgabri;
 
 
+import br.com.mmgabri.metrics.MetricService;
 import io.opentelemetry.api.metrics.Meter;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -48,8 +49,8 @@ public class Controller {
             duration = Duration.between(startTime, OffsetDateTime.now()).toMillis();
             logger.info("Request processado em {} ms", duration);
 
-            metric.increment("app", "poc-metrics-otlp", "status", returnCode);
-            metric.registryDuration(duration, "app", "poc-metrics-otlp", "status", returnCode);
+            metric.increment("app_otlp_counter_teste1", "app", "poc-metrics-otlp", "status", returnCode);
+            metric.registryDuration("app_otlp_duration_teste1", duration, "app", "poc-metrics-otlp", "status", returnCode);
         } catch (Exception e) {
             logger.error("Error ao enviar métrica", e);
             throw new RuntimeException(e);

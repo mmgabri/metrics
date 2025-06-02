@@ -6,11 +6,11 @@ logging:
     root: INFO
 
 management:
-  otlp:
-    metrics:
-      export:
-        enabled: true
-        url: http://localhost:4317
+#  otlp:
+#    metrics:
+#      export:
+#        enabled: true
+#        url: http://localhost:4317
   metrics:
     distribution:
       percentiles-histogram:
