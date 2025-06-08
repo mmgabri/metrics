@@ -15,7 +15,7 @@ management:
   datadog:
     metrics:
       export:
-        apiKey: b194cdeecc9e1e62318497747e54eb61
+        apiKey: 2db422a83a4b94289d48ad223c7bf707
         step: 5s
         uri: https://us5.datadoghq.com/
   endpoints:

@@ -63,5 +63,9 @@ public class Controller {
             logger.error("Error ao enviar métrica", e);
             throw new RuntimeException(e);
         }
+
+
+
+
     }
 }

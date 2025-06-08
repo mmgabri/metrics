@@ -1,8 +1,7 @@
 package br.com.mmgabri;
 
-
-import br.com.mmgabri.metrics.MetricService;
-import io.opentelemetry.api.metrics.Meter;
+import io.micrometer.core.instrument.DistributionSummary;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +23,8 @@ public class Controller {
     private static final Logger logger = LoggerFactory.getLogger(Controller.class);
 
     private final ExecuteService service;
-    private final Meter opentelemetryMeter;
-    private final MetricService metric;
 
+    private final MeterRegistry micrometerRegistry;
 
     @PostMapping
     public Mono<ResponseEntity<String>> executeTransaction(@RequestBody DelayRequest request) {
@@ -45,12 +43,25 @@ public class Controller {
 
     private void incrementMetric(OffsetDateTime startTime, String returnCode) {
         try {
+            //Calcula duration
             var duration = 0L;
             duration = Duration.between(startTime, OffsetDateTime.now()).toMillis();
             logger.info("Request processado em {} ms", duration);
 
-            metric.increment("app_otlp_counter_teste1", "app", "poc-metrics-otlp", "status", returnCode);
-            metric.registryDuration("app_otlp_duration_teste1", duration, "app", "poc-metrics-otlp", "status", returnCode);
+            //Incrementa métrica via Micrometer
+            meterRegistry.counter("app_teste02_counter", "app", "autorizador", "status", returnCode).increment();
+
+            DistributionSummary summary = meterRegistry.summary("app_teste02_duration_distribution", "app", "autorizador", "status", returnCode);
+            summary.record(duration);
+
+            meterRegistry.summary("app_teste02_duration_summary", "app", "autorizador", "status", returnCode).record(duration);
+
+            micrometerRegistry.summary("app_api_duration", "endpoint", "/users", "request_id", "req_123").record(100);
+            micrometerRegistry.summary("app_api_duration", "endpoint", "/users", "request_id", "req_456").record(150);
+            micrometerRegistry.summary("app_api_duration", "endpoint", "/orders", "request_id", "req_789").record(200);
+
+
+
         } catch (Exception e) {
             logger.error("Error ao enviar métrica", e);
             throw new RuntimeException(e);

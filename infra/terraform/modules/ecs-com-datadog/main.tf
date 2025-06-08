@@ -67,9 +67,8 @@ resource "aws_ecs_task_definition" "service_task" {
             { name = "DD_APM_ENABLED", value = "true" },
         { name = "DD_LOGS_ENABLED", value = "true" },
         { name = "DD_DOGSTATSD_NON_LOCAL_TRAFFIC", value = "true" },
-        { name = "DD_JMXFETCH_ENABLED", value = "true" },  # Habilitar coleta de métricas JMX
-        { name = "DD_JMXFETCH_STATSD_HOST", value = "localhost" },
-        { name = "DD_JMXFETCH_STATSD_PORT", value = "8125" },
+        { name = "DD_CHECKS_TAG_CARDINALITY", value = "high" },
+        { name = "DD_DOGSTATSD_TAG_CARDINALITY", value = "high" },
         { name = "DD_HISTOGRAM_PERCENTILES", value = "0.99 0.95 0.90 0.50" }
       ]
       requiresCompatibilities = ["FARGATE"]

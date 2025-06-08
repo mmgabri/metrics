@@ -16,6 +16,7 @@ import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
+import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
 @RequestMapping("/increment")
@@ -49,9 +50,10 @@ public class Controller {
             logger.info("Request processado em {} ms", duration);
 
             //Incrementa métrica via DogStatsD
-            statsDClient.recordDistributionValue("app_teste3_duration_distribution", duration, "app:poc-metrics", "status:" + returnCode);
-            statsDClient.recordDistributionValue("app_teste3_tps_distribution", 1, "app:poc-metrics", "status:" + returnCode);
-            statsDClient.incrementCounter("app_teste3_count", "app:autorizador", "status:" + returnCode);
+            statsDClient.recordDistributionValue("app_teste2_duration_distribution", duration, "app:poc-metrics", "status:" + returnCode);
+            statsDClient.recordDistributionValue("app_teste2_duration1_distribution", 1, "app:poc-metrics", "status:" + returnCode);
+            statsDClient.recordDistributionValue("app_teste2_duration1a5_distribution", ThreadLocalRandom.current().nextLong(1, 6), "app:poc-metrics", "status:" + returnCode);
+            statsDClient.incrementCounter("app_teste2_count", "app:autorizador", "status:" + returnCode);
         } catch (Exception e) {
             logger.error("Error ao enviar métrica", e);
             throw new RuntimeException(e);

@@ -18,4 +18,4 @@ ecr_repository_names = [
 
 poc_metrics_ecr_repository = "140023369634.dkr.ecr.us-east-1.amazonaws.com/poc-metrics"
 
-datadog_api_key = "b194cdeecc9e1e62318497747e54eb61"
+datadog_api_key = "2db422a83a4b94289d48ad223c7bf707"
